@@ -46,14 +46,15 @@ public class Constructor extends Activity {
     	return;
     }
     /****************************************************/
-    public static String getDrinkName(long db_id, DBAdapter db){
-    	db.open();
+    public static String getDrinkName(int db_id, DBAdapter db){
+    	//db.open();
         Cursor c = db.getRecipe(db_id);
         if (c.moveToFirst()){        
-            String temp = db.DisplayDrinkName(c);
-            c.close();
-            db.close();
-            return temp;
+            //String temp = db.DisplayDrinkName(c);
+            //c.close();
+            //db.close();
+            //return temp;
+            return db.DisplayDrinkName(c);
         }
         else {
         	c.close();
@@ -62,14 +63,15 @@ public class Constructor extends Activity {
             return error;
         }
     }
-    public static String getDrinkRecipe(long db_id, DBAdapter db){
-    	db.open();
-        Cursor c = db.getRecipe(db_id);
-        if (c.moveToFirst()){        
-            String temp = db.DisplayDrinkRecipe(c);
-            c.close();
-            db.close();
-            return temp;
+    public static String getDrinkRecipe(int db_id, DBAdapter db){
+    	//db.open();
+    	Cursor c = db.getRecipe(db_id);
+    	if (c.moveToFirst()){        
+            //String temp = db.DisplayDrinkRecipe(c);
+            //c.close();
+            //db.close();
+            //return temp;
+            return db.DisplayDrinkRecipe(c);
         }
         else {
         	c.close();
@@ -78,14 +80,15 @@ public class Constructor extends Activity {
             return error;
         }
     }
-    public static String getDrinkDirections(long db_id, DBAdapter db){
-    	db.open();
-        Cursor c = db.getRecipe(db_id);
-        if (c.moveToFirst()){        
-            String temp = db.DisplayDrinkDirections(c);
-            c.close();
-            db.close();
-            return temp;
+    public static String getDrinkDirections(int db_id, DBAdapter db){
+    	//db.open();
+    	Cursor c = db.getRecipe(db_id);
+    	if (c.moveToFirst()){        
+           // String temp = db.DisplayDrinkDirections(c);
+            //c.close();
+            //db.close();
+            //return temp;
+    		return db.DisplayDrinkDirections(c);
         }
         else {
         	c.close();
@@ -94,7 +97,5 @@ public class Constructor extends Activity {
             return error;
         }
     }
+    
 }
-//ICONS:
-//Author:	deleket
-//Website:	http://deleket.deviantart.com/

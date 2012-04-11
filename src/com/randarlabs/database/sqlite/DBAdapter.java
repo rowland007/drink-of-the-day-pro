@@ -1,10 +1,15 @@
 package com.randarlabs.database.sqlite;
 
+import java.io.IOException;
+import java.util.Locale;
+import java.util.Random;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 //import java.util.Random;
@@ -19,7 +24,7 @@ public class DBAdapter
     
     private static final String DATABASE_NAME = "drinks";
     private static final String DATABASE_TABLE = "recipes";
-    private static int DATABASE_VERSION = 1;
+    private static int DATABASE_VERSION = 20;
 
     private static final String DATABASE_CREATE =
         "create table recipes (_id integer primary key autoincrement, "
@@ -28,7 +33,7 @@ public class DBAdapter
     private final Context context; 
     
     private DatabaseHelper DBHelper;
-    private SQLiteDatabase db;
+    private static SQLiteDatabase db;
 
     public DBAdapter(Context ctx) 
     {
@@ -46,7 +51,7 @@ public class DBAdapter
         @Override
         public void onCreate(SQLiteDatabase db) 
         {
-            db.execSQL(DATABASE_CREATE);
+            db.execSQL(DATABASE_CREATE);         
         }
 
         @Override
@@ -67,9 +72,69 @@ public class DBAdapter
             db.execSQL("DROP TABLE IF EXISTS recipes");
             onCreate(db);
         }
+        /**
+         * Creates a empty database on the system and rewrites it with your own database.
+         * */
+        @SuppressWarnings("unused")
+		public void createDataBase() throws IOException{
+     
+        	boolean dbExist = DBExists();
+     
+        	if(dbExist){
+        		//do nothing - database already exist
+        		
+        		db.setVersion(db.getVersion() + 1);
+        	}else{
+     
+        		//By calling this method and empty database will be created into the default system path
+                //of your application so we are going to be able to overwrite that database with our database.
+            	//this.getReadableDatabase();
+        		onCreate(db);
+            	//try {
+     
+        			//copyDataBase();
+     
+        		//} catch (IOException e) {
+     
+            		//throw new Error("Error copying database");
+     
+            	//}
+        	}
+     
+        }
     }
-    public void upDateVersion(){
-    	++DATABASE_VERSION;
+    
+    /**
+     * Check if the database already exist to avoid re-copying the file each time you open the application.
+     * @return true if it exists, false if it doesn't
+     */
+    private static boolean DBExists() {
+    	SQLiteDatabase db = null;
+    	
+    	try {
+    		String databasePath = DATABASE_NAME;
+    		db = SQLiteDatabase.openDatabase(databasePath, null, SQLiteDatabase.OPEN_READWRITE);
+    		db.setLocale(Locale.getDefault());
+    		db.setLockingEnabled(true);
+    		db.setVersion(db.getVersion() + 1);
+    		
+    	}	catch (SQLiteException e) {
+    		
+    			Log.e("SqlHelper", "database not found");
+    			
+    	}
+    	
+    	if(db != null) {
+    		db.close();
+    	}
+    	
+    	return db != null ? true : false;
+    }
+    
+
+    
+    public static void upDateVersion(int version){
+    	DATABASE_VERSION = version;
     }
     //---opens the database---
     public DBAdapter open() throws SQLException 
@@ -84,6 +149,13 @@ public class DBAdapter
         DBHelper.close();
     }
     
+    public int getDatabaseVersion(){
+    	return db.getVersion();
+    }
+    
+    public void setDatabaseVersion(int version){
+    	db.setVersion(version);
+    }
     //---insert a recipe into the database---
     public long insertRecipe(String drink, String recipe, String directions) 
     {
@@ -115,22 +187,32 @@ public class DBAdapter
                 null, 
                 null);
     }
-    //---retrieves a random recipe---
-  /*  public String getRandomEntry()
+    public int getAllEntries()
     {
-    	Cursor id = getAllRecipes();
-    	Random random = new Random();
-    	int rand = random.nextInt(getAllRecipes());
-    	if(rand == 0)
-    		++rand;
-    	Cursor cursor = db.rawQuery("HELP" + rand, null);
-    	if(cursor.moveToFirst()){
-    		return cursor.getString(0);
+    	Cursor cursor = db.rawQuery(
+    			"SELECT COUNT(drink) FROM recipes", null);
+    	if(cursor.moveToFirst()) {
+    		return cursor.getInt(0);
     	}
-    	return cursor.getString(0);
-    }*/
+    	return cursor.getInt(0);
+    }
+    //---retrieves a random recipe---
+    public int getRandomEntry()
+    {
+    	int id = 1;
+    	id = getAllEntries();
+    	
+    	Random random = new Random();
+    	int rand = random.nextInt(id) + 1;
+    	Cursor cursor = db.rawQuery(
+    					"SELECT _id FROM recipes WHERE _id = " + rand, null);
+    	if(cursor.moveToFirst()){
+    		return cursor.getInt(0);
+    	}
+    	return cursor.getInt(0);
+    }
     //---retrieves a particular recipe---
-    public Cursor getRecipe(long rowId) throws SQLException 
+    public Cursor getRecipe(int rowId) throws SQLException 
     {
         Cursor mCursor =
                 db.query(true, DATABASE_TABLE, new String[] {

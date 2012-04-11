@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/backrepeat"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+    <TableLayout
+        android:id="@+id/tableLayout_main"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_weight="0.98"
+        android:gravity="center_horizontal" >
+
+        <TableRow
+            android:id="@+id/tableRow1_ThemeName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/my_border2"
+            android:baselineAligned="false"
+            android:gravity="center" >
+
+            <TextView
+                android:id="@+id/TV_themeTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="THEME OF THE DAY"
+                android:textColor="#dfdcbb"
+                android:textSize="26sp" />
+
+            
+
+        </TableRow>
+
+        <!--<TableRow
+            android:layout_width="match_parent"
+            android:layout_weight="0.02" >
+
+            <TextView                
+                android:id="@+id/TV_DatabaseVersion"
+                android:text="F"
+                android:textColor="#202020" />
+            USED FOR DEBUG...REMOVE THISE TextView BEFORE PUBLISH  
+
+        </TableRow>-->
+
+        <TableRow
+            android:id="@+id/tableRow2_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/my_border2" >
+
+            <TextView
+                android:id="@+id/TV_DrinkNameTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10sp"
+                android:layout_marginRight="10sp"
+                android:label="main_screen_drinks"
+                android:text="DRINK:"
+                android:textColor="#dfdcbb"
+                android:textSize="10sp" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRowDrinkName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/my_border"
+            android:baselineAligned="false" >
+
+            <TextView
+                android:id="@+id/TV_DrinkName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10sp"
+                android:layout_marginRight="10sp"
+                android:text="DRINK&apos;S NAME HERE"
+                android:textColor="#dfdcbb" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_weight="0.02" />
+
+        <TableRow
+            android:id="@+id/tableRow3_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/my_border2" >
+
+            <TextView
+                android:id="@+id/TV_DrinkRecipeTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10sp"
+                android:layout_marginRight="10sp"
+                android:label="main_screen_drinks"
+                android:text="INGREDIENTS:"
+                android:textColor="#dfdcbb"
+                android:textSize="10sp" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRowDrinkRecipe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/my_border"
+            android:baselineAligned="false" >
+
+            <TextView
+                android:id="@+id/TV_DrinkRecipe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10sp"
+                android:layout_marginRight="10sp"
+                android:text="DRINK&apos;S INGREDIENTS HERE"
+                android:textColor="#dfdcbb" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_weight="0.02" />
+
+        <TableRow
+            android:id="@+id/tableRow4_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/my_border2" >
+
+            <TextView
+                android:id="@+id/TV_DrinkDirectionsTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10sp"
+                android:layout_marginRight="10sp"
+                android:label="main_screen_drinks"
+                android:text="DIRECTIONS:"
+                android:textColor="#dfdcbb"
+                android:textSize="10sp" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRowDrinkDirections"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/my_border"
+            android:baselineAligned="false" >
+
+            <TextView
+                android:id="@+id/TV_DrinkDirections"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10sp"
+                android:layout_marginRight="10sp"
+                android:text="DRINK&apos;S DIRECTIONS HERE"
+                android:textColor="#dfdcbb" />
+        </TableRow>
+    </TableLayout>
+
+    <ImageButton
+        android:id="@+id/imageButtonNextRandom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/menu_shuffle" />
+
+    <com.google.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/admob_ID"
+        android:gravity="center_horizontal"
+        ads:loadAdOnCreate="true" />
+
+</LinearLayout>
