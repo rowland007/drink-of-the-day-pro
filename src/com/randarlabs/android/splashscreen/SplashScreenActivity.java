@@ -32,7 +32,7 @@ public class SplashScreenActivity extends Activity {
 			if (data.showSplashScreen) {
 				showSplashScreen();
 			}
-			setContentView(com.randarlabs.android.R.layout.main3);
+			setContentView(com.randarlabs.android.drinks.pro.R.layout.main3);
 			/*/ Rebuild your UI with your saved state here
 			FindDate.setDate();
 			ThemeOfTheDay.setTheme();
@@ -70,7 +70,7 @@ public class SplashScreenActivity extends Activity {
 		
 		} else {
 			showSplashScreen();
-			setContentView(com.randarlabs.android.R.layout.main3);
+			setContentView(com.randarlabs.android.drinks.pro.R.layout.main3);
 			// Do your heavy loading here on a background thread
 
 			FindDate.setDate();
@@ -88,13 +88,13 @@ public class SplashScreenActivity extends Activity {
 			database.open();
 
 			rowID = database.getRandomEntry();
-			TextView tvThemeTitle = (TextView) findViewById(com.randarlabs.android.R.id.TV_themeTitle);
+			TextView tvThemeTitle = (TextView) findViewById(com.randarlabs.android.drinks.pro.R.id.TV_themeTitle);
 			tvThemeTitle.setText(ThemeOfTheDay.getTheme());
-			TextView tvDrinkTitle = (TextView) findViewById(com.randarlabs.android.R.id.TV_DrinkName);
+			TextView tvDrinkTitle = (TextView) findViewById(com.randarlabs.android.drinks.pro.R.id.TV_DrinkName);
 			tvDrinkTitle.setText(Constructor.getDrinkName(rowID, database));
-			TextView tvDrinkRecipe = (TextView) findViewById(com.randarlabs.android.R.id.TV_DrinkRecipe);
+			TextView tvDrinkRecipe = (TextView) findViewById(com.randarlabs.android.drinks.pro.R.id.TV_DrinkRecipe);
 			tvDrinkRecipe.setText(Constructor.getDrinkRecipe(rowID, database));
-			TextView tvDrinkDirections = (TextView) findViewById(com.randarlabs.android.R.id.TV_DrinkDirections);
+			TextView tvDrinkDirections = (TextView) findViewById(com.randarlabs.android.drinks.pro.R.id.TV_DrinkDirections);
 			tvDrinkDirections.setText(Constructor.getDrinkDirections(rowID,
 					database));
 			
@@ -111,7 +111,7 @@ public class SplashScreenActivity extends Activity {
 		}
 
 		// Capture our button from layout
-		ImageButton randomButton = (ImageButton) findViewById(com.randarlabs.android.R.id.imageButtonNextRandom);
+		ImageButton randomButton = (ImageButton) findViewById(com.randarlabs.android.drinks.pro.R.id.imageButtonNextRandom);
 		// Register the onClick listener with the implementation
 		randomButton.setOnClickListener(mRandomListener);
 	}
@@ -143,8 +143,8 @@ public class SplashScreenActivity extends Activity {
 	 */
 	protected void showSplashScreen() {
 		mSplashDialog = new Dialog(this,
-				com.randarlabs.android.R.style.SplashScreen);
-		mSplashDialog.setContentView(com.randarlabs.android.R.layout.splash);
+				com.randarlabs.android.drinks.pro.R.style.SplashScreen);
+		mSplashDialog.setContentView(com.randarlabs.android.drinks.pro.R.layout.splash);
 		mSplashDialog.setCancelable(false);
 		mSplashDialog.show();
 
@@ -170,11 +170,11 @@ public class SplashScreenActivity extends Activity {
 		public void onClick(View v) {
 			database.open();
 			int rowID = database.getRandomEntry();
-			TextView tvDrinkTitle = (TextView) findViewById(com.randarlabs.android.R.id.TV_DrinkName);
+			TextView tvDrinkTitle = (TextView) findViewById(com.randarlabs.android.drinks.pro.R.id.TV_DrinkName);
 			tvDrinkTitle.setText(Constructor.getDrinkName(rowID, database));
-			TextView tvDrinkRecipe = (TextView) findViewById(com.randarlabs.android.R.id.TV_DrinkRecipe);
+			TextView tvDrinkRecipe = (TextView) findViewById(com.randarlabs.android.drinks.pro.R.id.TV_DrinkRecipe);
 			tvDrinkRecipe.setText(Constructor.getDrinkRecipe(rowID, database));
-			TextView tvDrinkDirections = (TextView) findViewById(com.randarlabs.android.R.id.TV_DrinkDirections);
+			TextView tvDrinkDirections = (TextView) findViewById(com.randarlabs.android.drinks.pro.R.id.TV_DrinkDirections);
 			tvDrinkDirections.setText(Constructor.getDrinkDirections(rowID,
 					database));
 			database.close();

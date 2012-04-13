@@ -173,13 +173,5 @@
         android:layout_height="wrap_content"
         android:src="@drawable/menu_shuffle" />
 
-    <com.google.ads.AdView
-        android:id="@+id/adView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        ads:adSize="BANNER"
-        ads:adUnitId="@string/admob_ID"
-        android:gravity="center_horizontal"
-        ads:loadAdOnCreate="true" />
 
 </LinearLayout>
