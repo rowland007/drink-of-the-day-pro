@@ -7,7 +7,7 @@
         android:icon="@drawable/icon96" 
         android:label="@string/app_name" 
 		android:persistent="false"
-		android:theme="@android:style/Theme.NoTitleBar">
+		android:theme="@android:style/Theme.DeviceDefault.Light.DarkActionBar">
         <activity 
             android:name="com.randarlabs.android.splashscreen.SplashScreenActivity">
             <intent-filter>
